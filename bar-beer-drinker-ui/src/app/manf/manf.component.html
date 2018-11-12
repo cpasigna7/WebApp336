@@ -3,18 +3,22 @@
   <h1 class="display-4">Manufacturers</h1>
   <p class="lead">Select a manufacturer below to see some advanced statistics and analytics about it.</p>
 </div>
-</div>
-  <div>
-    <table class="table">
-    <thead>
-    <tr>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let manfs of manfs; index as i">
-    <th>{{ manfs.manf }}</th>
-    </tr>
-    </tbody>
-    </table>
-   </div>
 
+   <div class="container">
+      <p-table [value]="manfs">
+        <ng-template pTemplate="header">
+            <tr>
+              <th>Manufacturer</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-manfs>
+            <tr>
+              <td>
+                <a routerLink="/manfs/{{ manfs.manf }}">
+                  {{manfs.manf}}
+                </a>
+              </td>
+            </tr>
+        </ng-template>
+      </p-table>
+    </div>

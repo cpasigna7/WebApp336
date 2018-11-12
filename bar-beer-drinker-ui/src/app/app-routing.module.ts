@@ -5,6 +5,7 @@ import { BarDetailsComponent } from './bar-details/bar-details.component';
 import { BeerslistComponent } from './beerslist/beerslist.component';
 import { BeerDetailsComponent } from './beer-details/beer-details.component';
 import {ManfComponent} from './manf/manf.component';
+import { ManfDetailsComponent } from './manf-details/manf-details.component';
 
 const routes: Routes = [
   {
@@ -36,7 +37,13 @@ const routes: Routes = [
     path: 'manf',
     pathMatch: 'full',
     component: ManfComponent
+  },
+  {
+    path: 'manfs/:manf',
+    pathMatch: 'full',
+    component: ManfDetailsComponent
   }
+
 ];
 
 
