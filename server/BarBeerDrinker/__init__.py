@@ -103,3 +103,7 @@ def find_bar_top10Bars(name, day):
 @app.route('/api/manf', methods=["GET"])
 def get_manf():
     return jsonify(database.get_manf())
+
+@app.route('/api/bartender', methods=["GET"])
+def get_bartenders_from_bar(name):
+    return jsonify(database.get_bartenders_from_bar(name))

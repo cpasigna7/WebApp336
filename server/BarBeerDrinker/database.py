@@ -93,7 +93,7 @@ def get_manf():
 
 def find_manf_region_sales(name):
     with engine.connect() as con:
-        query = sql.text("""SSELECT city, state, SUM(quantity) as Sold
+        query = sql.text("""SELECT city, state, SUM(quantity) as Sold
         FROM (SELECT beer.manf as manf, bar.city as city, bar.state as state, bo.quantity as quantity
         FROM Beers beer
         JOIN Sells s ON beer.name = s.Itemsname
@@ -109,3 +109,16 @@ def find_manf_region_sales(name):
         for r in results:
             r['Sold'] = int(r['Sold'])
         return results
+
+def get_bartenders_from_bar(name):
+    with engine.connect() as con:
+        query = sql.text(
+            """SELECT w1.Bartendersname
+        FROM Works w1
+        WHERE w1.Barsname = :name;"""
+        )
+        rs = con.execute(query, name=name)
+        result = rs.first()
+        if result is None:
+            return None
+        return dict(result)

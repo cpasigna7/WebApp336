@@ -24,7 +24,7 @@ constructor(
         },
         (error: HttpResponse<any>) => {
           if (error.status === 404) {
-            alert('Manfacturer not found')
+            alert('Manufacturer not found')
           } else {
             console.error(error.status + ' - ' + error.body);
             alert('An error occured on the server. Please check the browser console.');

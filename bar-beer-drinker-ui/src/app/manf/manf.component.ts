@@ -28,5 +28,4 @@ export class ManfComponent implements OnInit {
       }
     )
   }
-
 }

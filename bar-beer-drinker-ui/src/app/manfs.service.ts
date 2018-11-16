@@ -19,6 +19,6 @@ export class ManfsService {
   }
 
   getManf(manf: string){
-    return this.http.get<manfs>('api/manf/' + manf);
+    return this.http.get<manfs>('/api/manfs/' + manf);
   }
 }
