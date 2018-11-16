@@ -15,6 +15,6 @@ export class BartendersService {
   ) { }
 
   getBartendersFromBars(name: string) {
-    return this.http.get<Bartender[]>('/api/bartender');
+    return this.http.get<Bartender[]>('/api/bartender'+ name);
     }
 }

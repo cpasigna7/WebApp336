@@ -104,6 +104,16 @@ def find_bar_top10Bars(name, day):
 def get_manf():
     return jsonify(database.get_manf())
 
-@app.route('/api/bartender', methods=["GET"])
+@app.route('/api/bartender/<name>/', methods=["GET"])
 def get_bartenders_from_bar(name):
-    return jsonify(database.get_bartenders_from_bar(name))
+    try:
+        if name is None:
+            raise ValueError("Bartender is not specified.")
+        bartender = database.get_bartenders_from_bar(name)
+        if bartender is None:
+            return make_response("no bartender found with given name", 404)
+        return jsonify(bartender)
+    except ValueError as e:
+        return make_response(str(e), 400)
+    except Exception as e:
+        return make_response(str(e), 500)

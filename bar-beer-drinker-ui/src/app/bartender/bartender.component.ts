@@ -14,7 +14,9 @@ export class BartenderComponent implements OnInit {
   bars: Bar[];
   bartendersfrombars: Bartender[];
   selectBars: SelectItem[];
+  selectBartenders: SelectItem[];
   currBar: string;
+  currBartender: string;
 
   constructor(
     private barService: BarsService,
@@ -30,9 +32,22 @@ export class BartenderComponent implements OnInit {
       });
     }
     );
-
     this.currBar = "Club No Minors";
+
+    bartenderService.getBartendersFromBars(this.currBar).subscribe(
+      data => {
+        this.selectBars = data.map(Bartender => {
+          return {
+          label: Bartender.name,
+          value: Bartender.name,
+          };
+        });
+      }
+      );
+
+    
   }
+
   ngOnInit() {
   }
 

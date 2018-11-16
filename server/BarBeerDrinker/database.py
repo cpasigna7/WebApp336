@@ -118,7 +118,7 @@ def get_bartenders_from_bar(name):
         WHERE w1.Barsname = :name;"""
         )
         rs = con.execute(query, name=name)
-        result = rs.first()
-        if result is None:
+        results = [dict(row) for row in rs]
+        if results is None:
             return None
-        return dict(result)
+        return results
