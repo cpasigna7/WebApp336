@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 
 export interface Bartender {
     Bartendersname: string;
+    Dateday: string;
+    start: string;
+    end: string;
 }
 
 @Injectable({

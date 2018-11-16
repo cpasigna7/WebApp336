@@ -24,12 +24,7 @@ export class BartenderComponent implements OnInit {
     private bartenderService: BartendersService,
     private route: ActivatedRoute
   ) {
-    barService.getBars().subscribe(
-      data => {
-        console.log(data);
-        this.bars = data;
-      }
-    )
+    
     barService.getBars().subscribe(
       data => {
         this.selectBars = data.map(Bar => {
@@ -38,6 +33,7 @@ export class BartenderComponent implements OnInit {
           value: Bar.name,
           };
         });
+        this.bars = data;
       }
     );
     this.currBar = 'Club No Minors';
@@ -49,6 +45,7 @@ export class BartenderComponent implements OnInit {
           value: Bartender.Bartendersname,
           };
         });
+        this.bartendersfrombars = data;
       }
       );
     

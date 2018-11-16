@@ -113,7 +113,7 @@ def find_manf_region_sales(name):
 def get_bartenders_from_bar(name):
     with engine.connect() as con:
         query = sql.text(
-            """SELECT w1.Bartendersname
+            """SELECT *
         FROM Works w1
         WHERE w1.Barsname = :name;"""
         )
