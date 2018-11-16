@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 export interface Bartender {
-    name: string;
+    Bartendersname: string;
 }
 
 @Injectable({
@@ -15,6 +15,6 @@ export class BartendersService {
   ) { }
 
   getBartendersFromBars(name: string) {
-    return this.http.get<Bartender[]>('/api/bartender'+ name);
+    return this.http.get<Bartender[]>('/api/bartender/'+ name);
     }
 }
