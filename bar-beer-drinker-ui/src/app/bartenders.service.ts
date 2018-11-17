@@ -29,4 +29,7 @@ export class BartendersService {
   getBartenderSales(name: string, bartender: string){
     return this.http.get<BartenderSales[]>('api/bartender/'+name+'/'+bartender+'/BartenderSales')
   }
+  getBartenderShift(name: string){
+    return this.http.get<Bartender[]>('api/bartendershift/'+ name);
+  }
 }

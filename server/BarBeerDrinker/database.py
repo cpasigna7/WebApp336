@@ -151,3 +151,17 @@ def find_bartender_sales(name, bartender):
         for r in results:
             r['Sold'] = int(r['Sold'])
         return results
+
+def get_bartender_shift(name):
+    with engine.connect() as con:
+        query = sql.text(
+        """SELECT Dateday, start, end
+        FROM Works
+        WHERE Bartendersname = :name;"""
+        )
+        rs = con.execute(query, name=name)
+        results = [dict(row) for row in rs]
+        if results is None:
+            return None
+        return results
+        

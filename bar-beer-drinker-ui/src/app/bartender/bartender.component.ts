@@ -16,10 +16,14 @@ export class BartenderComponent implements OnInit {
 
   bars: Bar[];
   bartendersfrombars: Bartender[];
+  bartenderShift: Bartender[];
   selectBars: SelectItem[];
   selectBartenders: SelectItem[];
   currBar: string;
   currBartender: string;
+  currDateday: string;
+  currstart: string;
+  currend: string;
 
   constructor(
     private barService: BarsService,
@@ -47,7 +51,6 @@ export class BartenderComponent implements OnInit {
           value: Bartender.Bartendersname,
           };
         });
-        this.bartendersfrombars = data;
       }
       );
       this.currBartender = 'Meilani Wells';
@@ -64,6 +67,12 @@ export class BartenderComponent implements OnInit {
           this.renderChart(Itemsname, Sold);
         }
         );
+      this.currDateday = ''
+      this.bartenderService.getBartenderShift(this.currBartender).subscribe(
+          data => {
+            this.bartenderShift = data;
+          }
+      )
   }
   sortBars(selectedOption: string){
     this.currBar = selectedOption;
@@ -91,7 +100,9 @@ export class BartenderComponent implements OnInit {
             this.renderChart(Itemsname, Sold);
           }
           );
+          
     }
+        
   }
 
   sortBartenders(selectedOption: string) {
@@ -110,8 +121,13 @@ export class BartenderComponent implements OnInit {
           this.renderChart(Itemsname, Sold);
         }
         );
-
+      this.bartenderService.getBartenderShift(this.currBartender).subscribe(
+        data => {
+          this.bartenderShift = data;
+        }
+      )
     }
+
   }
   ngOnInit() {
   }
