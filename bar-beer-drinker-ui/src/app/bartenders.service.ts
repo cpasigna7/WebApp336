@@ -8,6 +8,11 @@ export interface Bartender {
     end: string;
 }
 
+export interface BartenderSales{
+  Itemsname: string;
+  Sold: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,4 +25,8 @@ export class BartendersService {
   getBartendersFromBars(name: string) {
     return this.http.get<Bartender[]>('/api/bartender/'+ name);
     }
+  
+  getBartenderSales(name: string, bartender: string){
+    return this.http.get<BartenderSales[]>('api/bartender/'+name+'/'+bartender+'/BartenderSales')
+  }
 }

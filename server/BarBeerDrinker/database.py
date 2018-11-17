@@ -122,3 +122,32 @@ def get_bartenders_from_bar(name):
         if results is None:
             return None
         return results
+
+def find_bartender_sales(name, bartender):
+    with engine.connect() as con:
+        query = sql.text("""
+        SELECT e.Itemsname, SUM(e.quantity) as Sold, e.Itemsname, e.dayd, f.Dateday, e.timet 
+        FROM
+        (Select bo1.Itemsname, bn1.transactionID, bn1.timet, bn1.Barsname, bn1.dayd, bo1.quantity
+        FROM Beers b1
+        JOIN Bought bo1 ON bo1.Itemsname = b1.name
+        JOIN Billsnew bn1 ON bn1.transactionID = bo1.BillstransactionID
+        WHERE bn1.Barsname = :name) e,
+        (Select w1.start, w1.end, w1.Dateday
+        FROM Works w1
+        WHERE w1.Bartendersname = :bartender AND w1.Barsname = :name) f
+        WHERE e.dayd = f.Dateday AND
+        (((str_to_date(e.timet, '%l:%i %p')) >= str_to_date(f.start, '%l:%i %p') 
+        AND (str_to_date(e.timet, '%l:%i %p') <= str_to_date(f.end, '%l:%i %p')))
+        OR
+        ((str_to_date(e.timet, '%l:%i %p')) >= str_to_date(f.start, '%l:%i %p') 
+        OR (str_to_date(e.timet, '%l:%i %p') <= str_to_date(f.end, '%l:%i %p'))))
+        GROUP by e.Itemsname
+        order by Sold desc
+        LIMIT 10;"""
+        )
+        rs = con.execute(query, name=name, bartender=bartender)
+        results = [dict(row) for row in rs]
+        for r in results:
+            r['Sold'] = int(r['Sold'])
+        return results

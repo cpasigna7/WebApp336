@@ -6,10 +6,11 @@
 </div>
 <div>
     <p class="float-left">Time of shift:
-        {{ bartendersfrombars[5].Dateday }}
+        {{ bartendersfrombars[0].Dateday }}
           <br>
-          {{ bartendersfrombars[5].start }} <span>-</span> {{bartendersfrombars[5].end }} 
+          {{ bartendersfrombars[0].start }} <span>-</span> {{bartendersfrombars[0].end }} 
     </p>
   <p-dropdown class = "float-right text-left" *ngIf="selectBartenders" [options]="selectBartenders"  (onChange)="sortBartenders($event.value)" ></p-dropdown>
   <p-dropdown class = "float-right text-left" *ngIf="selectBars" [options]="selectBars"  (onChange)="sortBars($event.value)" ></p-dropdown>
+  <div id = "bargraph"></div>
 </div>

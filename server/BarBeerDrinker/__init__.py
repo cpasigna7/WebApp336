@@ -117,3 +117,15 @@ def get_bartenders_from_bar(name):
         return make_response(str(e), 400)
     except Exception as e:
         return make_response(str(e), 500)
+
+@app.route('/api/bartender/<name>/<bartender>/BartenderSales', methods=['GET'])
+def find_bartender_sales(name, bartender):
+    try:
+        if name is None:
+            raise ValueError("Bar is not specified.")
+        bartender = database.find_bartender_sales(name, bartender)
+        return jsonify(bartender)
+    except ValueError as e:
+        return make_response(str(e), 400)
+    except Exception as e:
+        return make_response(str(e), 500)
